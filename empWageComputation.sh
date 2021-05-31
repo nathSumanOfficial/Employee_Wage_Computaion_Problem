@@ -6,10 +6,14 @@ isPresent=$(( RANDOM%2 ))
 wagePerHr=20
 fulldayHr=8
 
+fullPart=$((RANDOM%2))
+
 if [[ $isPresent -eq 1 ]]; then
 	echo "Employee is Present"
 else
 	echo "Employee is Absent"
 fi
 
-fulldayWage=$(($wagePerHr*fulldayHr))
+if [[ $fullPart -eq 1 ]]; then
+	fulldayWage=$(($wagePerHr*fulldayHr))
+fi
