@@ -14,21 +14,34 @@ isFull=2
 day=1
 totalHrs=0
 
+function wageHrs(){
+	local hrs=0
+	if [[ $attendence -eq 0 ]]; then
+		hrs=$(( $1+0 ))
+		echo $hrs
+	elif [[ $attendence -eq 1 ]]; then
+		hrs=$(( $1+$partHr ))
+		echo $hrs
+	elif [[ $attendence -eq 2 ]]; then
+		hrs=$(( $1+$fullHr ))
+		echo $hrs
+	fi
+}
+
 while [[ $day -le 20 ]]; do
 	attendence=$((RANDOM%3))
 
 	case $attendence in
 	0)	wage=$(($wage+0))
-		totalHrs=$(( $totalHrs+0 ))
 		;;
 	1)  wage=$(( $wage+ ($wagePerHr*$partHr) ))
-		totalHrs=$(( $totalHrs+$partHr ))
 		;;
 	2)	wage=$(( $wage+ ($wagePerHr*$fullHr) ))
-		totalHrs=$(( $totalHrs+$fullHr ))
 		;;
 	*)	echo "Attendence Error"
 	esac
+
+	totalHrs=`wageHrs $totalHrs`
 
 	if [[ $totalHrs -eq 100 ]]; then
 		break
