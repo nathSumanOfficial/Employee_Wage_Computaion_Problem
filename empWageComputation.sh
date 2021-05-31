@@ -2,7 +2,8 @@
 
 echo $'\n'"Welcome to Employee Wage Computation Program on Master Branch"
 echo
-arr=()
+
+declare -A arr
 wagePerHr=20
 fullHr=8
 partHr=4
@@ -44,7 +45,7 @@ while [[ $day -lt 20 ]]; do
 		;;
 	*)	echo "Attendence Error"
 	esac
-	arr[$day]=$dailywage 
+	arr["Day "$day]=$dailywage 
 	totalHrs=`wageHrs $totalHrs`
 
 	if [[ $totalHrs -eq 100 ]]; then
@@ -56,5 +57,6 @@ done
 echo "Days = $day"
 echo "Hours = $totalHrs"
 echo "Daily wages for 1 Month are: "
+echo ${!arr[@]}
 echo ${arr[@]}
 echo "Wage for a month(i.e. 20 days or 100 hrs) = $wage"
