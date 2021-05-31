@@ -1,21 +1,29 @@
 #!/bin/bash
 
 echo $'\n'"Welcome to Employee Wage Computation Program on Master Branch"
+echo
 
-isPresent=$(( RANDOM%2 ))
+attendence=$(( RANDOM%3 ))
+
 wagePerHr=20
-fulldayHr=8
-partdayHr=4
-fullPart=$((RANDOM%2))
+fulltimeHr=8
+parttimeHr=4
+wage=-1
 
-if [[ $isPresent -eq 1 ]]; then
-	echo "Employee is Present"
-else
-	echo "Employee is Absent"
-fi
+isAbsent=0
+isPart=1
+isFull=2
 
-if [[ $fullPart -eq 1 ]]; then
-	fulldayWage=$(($wagePerHr*$fulldayHr))
-elif [[ $fullPart -eq 0 ]]; then
-	partdayWage=$(($wagePerHr*$partdayHr))
-fi
+case $attendence in
+	0)	echo "Employee is Absent"
+		wage=0
+		;;
+	1)  echo "Employee is Part-time"
+		wage=$(($wagePerHr*$parttimeHr))
+		;;
+	2)	echo "Employee is Full-time"
+		wage=$(($wagePerHr*fulltimeHr))
+		;;
+	*)	echo "Attendence Error"
+esac
+
